@@ -37,14 +37,26 @@ curl --header "Authorization: Bearer d3d535dedccc7f" \
       "current": {
         "event_id": 182827,
         "heat": 4,
-        "combined_from": [],
-        "combined_into": {}
+        "combined_from": [
+          {
+            "event_id": 181773,
+            "heat": 1
+          },
+          {
+            "event_id": 181774,
+            "heat": 1
+          }
+        ],
+        "combined_into": null
       },
       "next": {
         "event_id": null,
         "heat": null,
         "combined_from": [],
-        "combined_into": {}
+        "combined_into": {
+          "event_id": 181899,
+          "heat": 2
+        }
       }
     }]
   },
@@ -68,8 +80,12 @@ Field | type | Description
 is_live | boolean | If true, heat/event updates are begin published
 current.event_id | int | ID of current/last event published
 current.heat | int | Current/last event number published
+current.combined_from | array<{event,heat}> | Array of event/heats that are combined into this event/heat
+current.combined_into | {event,heat}|null | If set, indicates this event/heat is combined into the specified event/heat
 next.event_id | int | ID of event after current/last event published
 next.heat | int | Current/last event number published
+next.combined_from | array<{event,heat}> | Array of event/heats that are combined into this event/heat
+next.combined_into | {event,heat}|null | If set, indicates this event/heat is combined into the specified event/heat
 updated_at | timestamp | Timestamp of last event/heat update
 channel_name | string | Unique/random channel name to subscribe to push updates for this meet. (Via pusher.io)
 host_meet_date | date |
@@ -121,14 +137,14 @@ curl --header "Authorization: Bearer d3d535dedccc7f" \
       "current": {
         "event_id": 182827,
         "heat": 4,
-        "combined_into": [],
+        "combined_into": null,
         "combined_from": []
       },
       "next": {
         "event_id": null,
         "heat": null,
         "combined_from": [],
-        "combined_into": {}
+        "combined_into": null
       }
     }]
   },
@@ -197,14 +213,14 @@ curl --header "Authorization: Bearer d3d535dedccc7f" \
       "current": {
         "event_id": 182827,
         "heat": 4,
-        "combined_into": [],
+        "combined_into": null,
         "combined_from": []
       },
       "next": {
         "event_id": null,
         "heat": null,
         "combined_from": [],
-        "combined_into": []
+        "combined_into": null
       }
     }]
   },
